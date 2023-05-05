@@ -1,4 +1,5 @@
-const path = require('@vue/cli-service');
+/* eslint-env node */
+const path = require('path');
 
 module.exports = {
   outputDir: path.resolve(__dirname, 'dist'),
@@ -12,8 +13,9 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "@/styles/_variables.scss";` // замените путь на свой
+        additionalData: `@import "@/styles/main.scss";`
       }
     }
   }
 };
+
