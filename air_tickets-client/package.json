@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@vuestic/ag-grid-theme": "^1.0.3",
     "core-js": "^3.8.3",
+    "material-icons": "^1.13.7",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vuestic-ui": "^1.5.0"

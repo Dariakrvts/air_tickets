@@ -1,34 +1,29 @@
 <template>
-    <div id="app">
-     
-    <router-view/>
+  <div id="app">
 
-   <app-navigation class="fixed-bottom"></app-navigation>
-
-    </div>
- 
+    <router-view />
+    <app-navigation></app-navigation>
+    <home-view></home-view>
+    
+  </div>
 </template>
 
 <script>
-import AppNavigation from './components/uiComponents/AppNavigation.vue';
+import AppNavigation from './components/uiComponents/AppNavigation.vue'
+import HomeView from './views/HomeView.vue'
 
 export default {
   components: {
-    AppNavigation,
+    HomeView,
+    AppNavigation
   },
   data() {
-    return {
-    }
+    return {}
   },
   name: 'App'
 }
 </script>
 
 <style>
-.fixed-bottom {
-  position: fixed !important;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  }
-  </style>
+
+</style>
