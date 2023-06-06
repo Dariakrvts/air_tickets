@@ -2,7 +2,7 @@
   <div class="bottom-navbar" style="height: 60px;">
     <va-tabs v-model="value" grow hide-slider>
       <template #tabs>
-        <va-tab v-for="tab in tabs" :key="tab.icon" color="info">
+        <va-tab v-for="tab in tabs" :key="tab.icon" color="info" :to="tab.path">
           <i :class="tab.icon"></i>
         </va-tab>
       </template>
@@ -16,8 +16,8 @@ export default {
     return {
       value: 0,
       tabs: [
-        { icon: 'fas fa-plane icon_nav' },
-        { icon: 'fas fa-user icon_nav' }
+        { icon: 'fas fa-plane icon_nav', path: '/' },
+        { icon: 'fas fa-user icon_nav', path: '/account' }
       ]
     }
   },
@@ -35,7 +35,8 @@ export default {
   padding: 10px 0 0;
   background: #BCDEE0;
 }
-.icon_nav{
+
+.icon_nav {
   font-size: 24px;
 }
 </style>

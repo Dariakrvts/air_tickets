@@ -1,0 +1,34 @@
+[
+  {
+    "from": "City A",
+    "to": "City B",
+    "departure": "2023-06-01",
+    "arrival": "2023-06-02",
+    "price": 200,
+    "type": "two-way"
+  },
+  {
+    "from": "City C",
+    "to": "City D",
+    "departure": "2023-06-03",
+    "arrival": "2023-06-04",
+    "price": 250,
+    "type": "two-way"
+  },
+  {
+    "from": "City F",
+    "to": "City K",
+    "departure": "2023-06-03",
+    "arrival": "2023-06-04",
+    "price": 300,
+    "type": "two-way"
+  },
+  {
+    "from": "City B",
+    "to": "City A",
+    "departure": "2023-06-20",
+    "arrival": "2023-06-25",
+    "price": 240,
+    "type": "two-way"
+  }
+]
