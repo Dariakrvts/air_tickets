@@ -15,6 +15,11 @@
               </router-link>
             </div>
             <div class="flex items-center gap-8 flex-wrap">
+              <router-link to="/Account">
+                <va-button @click="logout" round color="#6B86D9" v-if="isRegister && isLoggedIn">
+                  Вихід
+                </va-button>
+              </router-link>
               <router-link to="/Register">
                 <va-button round color="#6B86D9B2">
                   Реєстрація
@@ -29,7 +34,7 @@
         <div class="account__info xs12">
           <div class="mail">
             <va-collapse v-model="valueMail" header="Зв'язок з розробниками" solid>
-              <div><a href="mailto:example@example.com">Написать нам</a></div>
+              <div><a href="mailto:example@example.com">example@example.com</a></div>
             </va-collapse>
           </div>
           <va-collapse v-model="valuePrivacyPolicy" header="Політика конфіденційності" solid>
@@ -42,13 +47,14 @@
             </div>
           </va-collapse>
           <va-collapse v-model="valueAboutUs" header="Про нас" solid>
-            <div>пМи вживаємо всіх необхідних заходів для захисту даних від несанкціонованого доступу, зміни, розкриття
-              чи знищення. До цих заходів належать, зокрема, внутрішня перевірка процесів збору, зберігання та обробки
-              даних і заходів безпеки, включаючи відповідне шифрування і заходи щодо забезпечення фізичної безпеки даних
-              для запобігання неавторизованого доступу до систем, в яких ми зберігаємо особисті дані.
-              Нагадування. Додаток не є справжнім.</div>
+            <div>потом заполнить
+            </div>
           </va-collapse>
-
+          <va-collapse v-model="valueArchive" header="Архів" solid v-if="isRegister">
+            <div>
+              потом заполнить
+            </div>
+          </va-collapse>
           <div class="rating-dialog">
             <h2>Оцените приложение</h2>
             <va-rating v-model="valueRating" />
@@ -61,24 +67,42 @@
 
 <script>
 export default {
+  name: 'AccountView',
   data() {
     return {
       valueAboutUs: false,
       valuePrivacyPolicy: false,
       valueMail: false,
+      valueArchive: false,
       valueRating: 3,
+      isRegister: false,
+      isLoggedIn: false,
     };
   },
   methods: {
+    handleClickshowExit() {
+      this.showExit = true
+    },
+    registerUser() {
+      this.isRegister = true;
+      this.isLoggedIn = false;
+    },
+
     scrollPage(opened) {
       if (opened) {
         const element = document.querySelector('.account__info');
         element.scrollIntoView({ behavior: 'smooth' });
       }
     },
+    submit() {
+      // Вход выполнен успешно
+      this.isRegister = true;
+      this.isLoggedIn = true;
+    },
   },
 };
 </script>
+
 
 <style>
 .AccountView {}

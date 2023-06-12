@@ -107,7 +107,6 @@ export default {
   methods: {
     handleClickshowTo() {
       this.showToDate = false; // Скрыть поле для выбора даты прибытия
-      // this.waybillTo = false; // Скрыть блок для выбора пункта прибытия
       this.showToColumn = true; // Скрыть столбец с пунктом прибытия в таблице
       this.valueFrom = []; // Сбросить выбранный пункт отправления
       this.valueTo = []; // Сбросить выбранный пункт прибытия
@@ -176,6 +175,7 @@ export default {
   height: 100vh;
   display: flex;
   justify-content: center;
+  /* background-color: #170b0b; */
 }
 
 .main__container {
