@@ -2,10 +2,10 @@
   <main class="AppNavigationHome">
     <div class="main__container md12">
       <div class="main__navigation md12">
-        <va-button class="btn-way md9" @change="handleFlightTypeChange" @click.stop="handleClickshowFrom()"> Туди й назад
-        </va-button>
-        <va-button class="btn-way md9" @change="handleFlightTypeChange" @click.stop="handleClickshowTo()"> Односторонній
-        </va-button>
+        <va-button class="btn-way md9" :color="flightType === 'roundTrip' ? '#BCDEE0' : '#7EB1B4'"
+          @click="handleFlightTypeChange('roundTrip')" @click.stop="handleClickshowFrom()">Туди й назад</va-button>
+        <va-button class="btn-way md9" :color="flightType === 'oneWay' ? '#BCDEE0' : '#7EB1B4'"
+          @click="handleFlightTypeChange('oneWay')" @click.stop="handleClickshowTo()">Односторонній</va-button>
       </div>
 
       <div class="path">
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="btm-revers" v-show="showTo">
-          <va-button round icon="cached" @click="reverseSelection()"></va-button>
+          <va-button color="#7EA3A5" round icon="cached" @click="reverseSelection()"></va-button>
         </div>
         <div class="main__waybillTo" v-if="waybillTo">
           <div>
@@ -27,20 +27,20 @@
       <div class="btn__info">
         <div class="row justify-space-between">
           <div class="date flex flex-col xs12">
-            <va-date-input v-if="showFromDate" class="date__input" label="Дата отправления" v-model="valueDateFrom" stateful
-              clearable :min-date="minDate" :max-date="maxDate" />
+            <va-date-input color="#447275" v-if="showFromDate" class="date__input" label="Дата відправлення"
+              v-model="valueDateFrom" stateful clearable :min-date="minDate" :max-date="maxDate" />
           </div>
           <div class="date flex flex-col xs12">
-            <va-date-input v-if="showToDate" class="date__input" label="Дата прибытия" v-model="valueDateTo" stateful
-              clearable :min-date="minDate" :max-date="maxDate" />
+            <va-date-input color="#447275" v-if="showToDate" class="date__input" label="Дата прибуття"
+              v-model="valueDateTo" stateful clearable :min-date="minDate" :max-date="maxDate" />
           </div>
         </div>
 
         <div class="price">
-          <va-select v-model="valueSingle" class="sm12" label="кількість осіб" :options="options" />
+          <va-select color="#447275" v-model="valueSingle" class="sm12" label="кількість осіб" :options="options" />
         </div>
         <div class="scan sm12">
-          <va-button size="medium" class="px-6" @click="searchFlights">Пошук рейсов</va-button>
+          <va-button color="#447275" size="medium" class="px-6" @click="searchFlights">Пошук рейсів</va-button>
         </div>
         <div class="tabel__tickets" v-if="flightsVisible">
           <table class="va-table va-table--striped  va-table--clickable">
@@ -59,14 +59,14 @@
               <td>{{ flight.departure }}</td>
             </tr>
           </table>
-          <div class="error">
+          <!-- <div class="error">
             <div v-if="valueFrom.length === 0 || valueTo.length === 0" class="error">
-              <!-- Рейсів не знайдено. Будь ласка вкажіть шлях та дату. -->
-            </div>
-            <div v-else class="error">
-              <!-- Всі можливі рейси -->
-            </div>
-          </div>
+              Рейсів не знайдено. Будь ласка вкажіть шлях та дату. -->
+          <!-- </div> -->
+          <!-- <div v-else class="error"> -->
+          <!-- Всі можливі рейси -->
+          <!-- </div> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -81,6 +81,7 @@ import flightsData from '@/data/FlyTickets.json';
 export default {
   data() {
     return {
+      flightType: 'roundTrip', // Изначальный выбранный тип полета
       valueSingle: 'Один', // Выбранное количество пассажиров
       selectedRow: null,
       optionsFrom: flightsData.map(flight => flight.from), // Опции для выбора пункта отправления
@@ -115,26 +116,23 @@ export default {
     },
     handleClickshowFrom() {
       this.showToDate = true; // Показать поле для выбора даты прибытия
-      // this.waybillTo = true; // Показать блок для выбора пункта прибытия
       this.showToColumn = true; // Показать столбец с пунктом прибытия в таблице
       this.valueDateTo = null; // Сбросить выбранную дату прибытия
     },
-    handleFlightTypeChange() {
+    handleFlightTypeChange(type) {
       // Очистить значения селектов и даты
       this.selectedFrom = '';
       this.selectedTo = '';
       this.selectedDate = null;
+      this.flightType = type;
     },
     reverseSelection() {
       [this.valueFrom, this.valueTo] = [this.valueTo, this.valueFrom]; // Поменять выбранные пункты отправления и прибытия местами
     },
-
     searchFlights() {
       this.flightsVisible = true; // Показать таблицу с рейсами
       this.flights = flightsData.filter(flight => {
         return (
-          // this.valueFrom.includes(flight.from) && // Фильтрация по выбранному пункту отправления
-          // this.valueTo.includes(flight.to) && // Фильтрация по выбранному пункту прибытия
           this.matchesSelectedDate(flight.departure) // Фильтрация по выбранной дате отправления
         );
       });
@@ -171,11 +169,14 @@ export default {
 
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .AppNavigationHome {
+  --va-font-family: 'Roboto', sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
-  /* background-color: #170b0b; */
+  /* background-color: #d1ffffcd; */
 }
 
 .main__container {
@@ -268,7 +269,7 @@ export default {
 }
 
 .tabel__tickets {
-  box-shadow: 0px 4px 6px rgba(52, 61, 215, 0.397);
+  box-shadow: 0px 4px 6px rgba(62, 94, 84, 0.7);
   overflow: auto;
 }
 </style>

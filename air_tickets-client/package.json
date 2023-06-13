@@ -22,7 +22,8 @@
     "vant": "^3.4.3",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuestic-ui": "^1.5.0"
+    "vuestic-ui": "^1.5.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

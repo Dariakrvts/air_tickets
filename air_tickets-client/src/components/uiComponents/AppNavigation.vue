@@ -2,7 +2,7 @@
   <div class="bottom-navbar" style="height: 60px;">
     <va-tabs v-model="value" grow hide-slider>
       <template #tabs>
-        <va-tab v-for="tab in tabs" :key="tab.icon" color="info" :to="tab.path">
+        <va-tab v-for="(tab, index) in tabs" :key="tab.icon" :to="tab.path" @click="value = index" :color="tabColor(index)">
           <i :class="tab.icon"></i>
         </va-tab>
       </template>
@@ -19,6 +19,11 @@ export default {
         { icon: 'fas fa-plane icon_nav', path: '/' },
         { icon: 'fas fa-user icon_nav', path: '/account' }
       ]
+    };
+  },
+  methods: {
+    tabColor(index) {
+      return this.value === index ? '#6F92ED' : '#4B669A'; // Замените 'success' и 'primary' на желаемые цвета
     }
   },
   name: 'AppNavigation'
